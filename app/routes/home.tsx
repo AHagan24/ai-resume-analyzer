@@ -1,9 +1,8 @@
 import Navbar from "~/components/Navbar";
 import type { Route } from "./+types/home";
-import { resumes } from "constants";
 import ResumeCard from "~/components/ResumeCard";
 import { usePuterStore } from "~/lib/puter";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 export function meta({}: Route.MetaArgs) {
@@ -16,6 +15,7 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   const { auth } = usePuterStore();
   const navigate = useNavigate();
+  const [resumes, setResumes] = useState<Resume[]>([]);
 
   useEffect(() => {
     if (!auth.isAuthenticated) navigate("/auth?next=/");
